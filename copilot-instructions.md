@@ -1,4 +1,3 @@
-
 # GitHub Copilot Instructions - 四時軍團 (Four Seasons Battle)
 
 ## Project Overview
