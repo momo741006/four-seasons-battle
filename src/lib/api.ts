@@ -118,7 +118,7 @@ export async function calculateBaziFromAPI(input: BaZiInput): Promise<BaZiChart>
       timezone: '+08:00', // 預設台灣時區
       options: {
         debug: false,
-        useTrueSolarTime: false,
+        useTrueSolarTime: input.useTrueSolarTime ?? true,
         use_early_zi: true, // 晚子時換日
         longitude: 121.5 // 預設台北經度
       }
