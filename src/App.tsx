@@ -21,8 +21,10 @@ function App() {
     setIsCalculating(true);
     
     try {
-      // Calculate Ba Zi chart
-      const chart = calculateBaZi(input);
+      // 調用後端 API 計算八字
+      toast.info("正在連接後端服務...");
+      const chart = await calculateBaZi(input);
+      
       setBaziChart(chart);
       
       // Create legions from the chart
@@ -36,7 +38,8 @@ function App() {
       setLegions(newLegions);
       toast.success("四時軍團生成成功！");
     } catch (error) {
-      toast.error("計算失敗，請重試");
+      const errorMessage = error instanceof Error ? error.message : "計算失敗，請重試";
+      toast.error(errorMessage);
       console.error('Ba Zi calculation error:', error);
     } finally {
       setIsCalculating(false);

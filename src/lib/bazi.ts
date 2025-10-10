@@ -1,4 +1,8 @@
 // Ba Zi (Eight Characters) calculation library
+// 現在使用後端 API 進行精準計算
+
+import { calculateBaziFromAPI, ApiError } from './api'
+
 export interface BaZiInput {
   year: number;
   month: number;
@@ -73,7 +77,41 @@ const TEN_GODS = {
   seal: '正印', partialSeal: '偏印'
 };
 
-export function calculateBaZi(input: BaZiInput): BaZiChart {
+/**
+ * 計算八字 - 使用後端 API 進行精準計算
+ * 
+ * 此函數現在調用後端專業八字計算器,確保:
+ * - 精確的節氣判斷(月柱)
+ * - 五虎遁、五鼠遁查表
+ * - 真太陽時支援
+ * - 子時換日處理
+ * - 完整的十神、神煞、納音計算
+ * 
+ * @param input 八字輸入資料
+ * @returns Promise<BaZiChart> 八字命盤
+ */
+export async function calculateBaZi(input: BaZiInput): Promise<BaZiChart> {
+  try {
+    // 調用後端 API 進行計算
+    return await calculateBaziFromAPI(input)
+  } catch (error) {
+    console.error('八字計算錯誤:', error)
+    
+    // 如果是 API 錯誤,拋出更友善的錯誤訊息
+    if (error instanceof ApiError) {
+      throw new Error(`八字計算失敗: ${error.message}`)
+    }
+    
+    throw new Error('八字計算失敗,請稍後再試')
+  }
+}
+
+/**
+ * 舊版本的本地計算函數 (已棄用)
+ * 保留作為參考,但不建議使用
+ * @deprecated 請使用新的 calculateBaZi 函數,它會調用後端 API
+ */
+export function calculateBaZiLocal(input: BaZiInput): BaZiChart {
   const { year, month, day, hour } = input;
   
   // Calculate year pillar (simplified)
