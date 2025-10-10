@@ -1,18 +1,19 @@
-# GitHub Copilot Instructions for Four Seasons Battle (四時軍團)
+# GitHub Copilot Instructions - 四時軍團 (Four Seasons Battle)
 
 ## Project Overview
 
-This is a **Four Seasons Battle** (四時軍團) web application that combines traditional Chinese BaZi (八字) fortune telling with modern gamification and AI-powered storytelling. The app transforms traditional fortune-telling pillars into themed military legions with characters and narratives.
+This is a Ba Zi (八字) astrology analysis system that combines traditional Chinese fortune-telling with a gamified military legion theme. The application transforms birth chart pillars into four themed legions (Family, Growth, Self, Future) with AI-generated stories.
 
 ## Tech Stack
 
-- **Frontend Framework**: React 19 with TypeScript
-- **Build Tool**: Vite 6
-- **Styling**: Tailwind CSS 4 with custom theme
-- **UI Components**: Radix UI primitives with shadcn/ui
-- **AI Integration**: GitHub Spark LLM (gpt-4o-mini) for story generation
-- **Data Visualization**: Recharts for charts and graphs
-- **Icons**: Phosphor Icons React
+- **Framework**: React 19 with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS v4 with custom neon/cyberpunk theme
+- **UI Components**: Radix UI primitives with custom styling
+- **State Management**: React hooks + @github/spark KV storage
+- **Charts**: Recharts for data visualization
+- **AI Integration**: GitHub Spark LLM API (gpt-4o-mini)
+- **Icons**: @phosphor-icons/react
 
 ## Core Functionality
 
@@ -46,134 +47,6 @@ This is a **Four Seasons Battle** (四時軍團) web application that combines t
 - Shows Yin-Yang distribution
 - Interactive charts using Recharts library
 
-## Code Review Guidelines
-
-### TypeScript & Type Safety
-- ✅ All components should use proper TypeScript types
-- ✅ Interfaces should be defined for props and data structures
-- ✅ Avoid using `any` type - use proper types or generics
-- ✅ Check for null/undefined handling with proper guards
-
-### React Best Practices
-- ✅ Use functional components with hooks
-- ✅ Implement proper error boundaries
-- ✅ Use `useCallback` and `useMemo` for optimization when needed
-- ✅ Handle loading and error states appropriately
-- ✅ Use Spark KV hooks (`useKV`) for persistent storage
-
-### UI/UX Considerations
-- ✅ Follow the neon/cyberpunk design theme with dark backgrounds
-- ✅ Ensure responsive design (mobile/tablet/desktop)
-- ✅ Use Tailwind classes consistently with the theme
-- ✅ Implement proper accessibility (ARIA labels, keyboard navigation)
-- ✅ Show appropriate loading states and progress indicators
-
-### Cultural & Domain Accuracy
-- ✅ Respect Chinese cultural concepts and terminology
-- ✅ Ensure BaZi calculations follow traditional rules
-- ✅ Maintain consistency in Chinese/English terminology
-- ✅ Verify element interactions follow Five Elements theory (五行相生相剋)
-
-### AI Integration
-- ✅ Handle AI generation failures gracefully with fallback content
-- ✅ Implement proper error handling for `window.spark.llm` calls
-- ✅ Use appropriate prompts that generate culturally relevant content
-- ✅ Consider token limits and response times
-
-### Performance
-- ✅ Optimize re-renders with proper dependency arrays
-- ✅ Lazy load components when appropriate
-- ✅ Use code splitting for larger features
-- ✅ Optimize images and assets
-
-### Testing Focus Areas
-- Data calculations (BaZi algorithm accuracy)
-- Form validation and input handling
-- AI story generation and fallback logic
-- Chart rendering and data transformation
-- Responsive layout across devices
-
-## Common Patterns to Look For
-
-### Good Practices
-```typescript
-// ✅ Proper error handling with toast notifications
-try {
-  const result = await window.spark.llm(prompt, "gpt-4o-mini");
-  toast.success("操作成功");
-} catch (error) {
-  toast.error("操作失敗，請重試");
-  console.error('Error:', error);
-}
-
-// ✅ Type-safe props
-interface LegionCardProps {
-  legion: Legion;
-  onSelect?: (legion: Legion) => void;
-}
-```
-
-### Patterns to Flag
-```typescript
-// ❌ Missing error handling
-const result = await window.spark.llm(prompt);
-
-// ❌ Using any type
-const data: any = calculateBaZi(input);
-
-// ❌ Missing loading states
-<Button onClick={handleGenerate}>生成</Button>
-
-// ❌ Hard-coded values that should be constants
-if (element === "wood") { ... } // Should use ELEMENTS constant
-```
-
-## Key Files to Review Carefully
-
-1. **`src/lib/bazi.ts`**: Core calculation logic - verify accuracy
-2. **`src/lib/legion.ts`**: Character assignment logic - ensure proper mapping
-3. **`src/components/AIStoryGenerator.tsx`**: AI integration - check error handling
-4. **`src/App.tsx`**: Main app logic - verify state management
-5. **`src/components/BaZiInputForm.tsx`**: Input validation - check edge cases
-
-## Terminology Reference
-
-- **八字 (BaZi)**: Eight Characters / Four Pillars of Destiny
-- **天干 (Tiangan)**: Heavenly Stems (10 total)
-- **地支 (Dizhi)**: Earthly Branches (12 total)
-- **五行 (Wuxing)**: Five Elements (Wood, Fire, Earth, Metal, Water)
-- **陰陽 (Yinyang)**: Yin and Yang
-- **十神 (Shishen)**: Ten Gods (relationships between elements)
-- **納音 (Nayin)**: Sixty Jiazi sound classification
-- **藏干 (Canggan)**: Hidden Heavenly Stems in Earthly Branches
-
-## Questions to Ask During Review
-
-1. Does this change respect the traditional BaZi calculation rules?
-2. Are AI-generated stories culturally appropriate and engaging?
-3. Is the error handling comprehensive for all async operations?
-4. Does the UI maintain the cyberpunk/neon theme consistently?
-5. Are Chinese terms used correctly and consistently?
-6. Is the code accessible to users with disabilities?
-7. Does the change work well on mobile devices?
-8. Are there any performance implications for the calculations or rendering?
-# GitHub Copilot Instructions - 四時軍團 (Four Seasons Battle)
-
-## Project Overview
-
-This is a Ba Zi (八字) astrology analysis system that combines traditional Chinese fortune-telling with a gamified military legion theme. The application transforms birth chart pillars into four themed legions (Family, Growth, Self, Future) with AI-generated stories.
-
-## Tech Stack
-
-- **Framework**: React 19 with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS v4 with custom neon/cyberpunk theme
-- **UI Components**: Radix UI primitives with custom styling
-- **State Management**: React hooks + @github/spark KV storage
-- **Charts**: Recharts for data visualization
-- **AI Integration**: GitHub Spark LLM API (gpt-4o-mini)
-- **Icons**: @phosphor-icons/react
-
 ## Code Style & Conventions
 
 ### TypeScript
@@ -182,6 +55,7 @@ This is a Ba Zi (八字) astrology analysis system that combines traditional Chi
 - Define interfaces for all data structures (BaZiInput, BaZiChart, Legion, etc.)
 - Avoid `any` types - use specific types or generics
 - Export types from their respective modules
+- Check for null/undefined handling with proper guards
 
 ### React Patterns
 
@@ -190,6 +64,9 @@ This is a Ba Zi (八字) astrology analysis system that combines traditional Chi
 - Use `useKV` hook from @github/spark for persistent state
 - Follow the existing pattern: `const [state, setState] = useKV<Type>("key", defaultValue)`
 - Handle async operations with try-catch blocks and proper error states
+- Implement proper error boundaries
+- Use `useCallback` and `useMemo` for optimization when needed
+- Handle loading and error states appropriately
 
 ### Component Structure
 
@@ -233,6 +110,9 @@ export function ComponentName({ prop1, prop2 }: ComponentProps) {
   - Background: Deep Space Blue (#0A0E27)
   - Accent: Neon Purple (#BB00FF)
   - Legion specific colors (gold-brown, green-yellow, blue-purple, orange-red)
+- Ensure responsive design (mobile/tablet/desktop)
+- Implement proper accessibility (ARIA labels, keyboard navigation)
+- Show appropriate loading states and progress indicators
 
 ### File Organization
 
@@ -348,6 +228,87 @@ const startTypewriter = (text: string) => {
 };
 ```
 
+## Code Review Guidelines
+
+### Cultural & Domain Accuracy
+- ✅ Respect Chinese cultural concepts and terminology
+- ✅ Ensure BaZi calculations follow traditional rules
+- ✅ Maintain consistency in Chinese/English terminology
+- ✅ Verify element interactions follow Five Elements theory (五行相生相剋)
+
+### AI Integration
+- ✅ Handle AI generation failures gracefully with fallback content
+- ✅ Implement proper error handling for `window.spark.llm` calls
+- ✅ Use appropriate prompts that generate culturally relevant content
+- ✅ Consider token limits and response times
+
+### Performance
+- ✅ Optimize re-renders with proper dependency arrays
+- ✅ Lazy load components when appropriate
+- ✅ Use code splitting for larger features
+- ✅ Optimize images and assets
+
+### Testing Focus Areas
+- Data calculations (BaZi algorithm accuracy)
+- Form validation and input handling
+- AI story generation and fallback logic
+- Chart rendering and data transformation
+- Responsive layout across devices
+
+## Common Patterns to Look For
+
+### Good Practices
+```typescript
+// ✅ Proper error handling with toast notifications
+try {
+  const result = await window.spark.llm(prompt, "gpt-4o-mini");
+  toast.success("操作成功");
+} catch (error) {
+  toast.error("操作失敗，請重試");
+  console.error('Error:', error);
+}
+
+// ✅ Type-safe props
+interface LegionCardProps {
+  legion: Legion;
+  onSelect?: (legion: Legion) => void;
+}
+```
+
+### Patterns to Flag
+```typescript
+// ❌ Missing error handling
+const result = await window.spark.llm(prompt);
+
+// ❌ Using any type
+const data: any = calculateBaZi(input);
+
+// ❌ Missing loading states
+<Button onClick={handleGenerate}>生成</Button>
+
+// ❌ Hard-coded values that should be constants
+if (element === "wood") { ... } // Should use ELEMENTS constant
+```
+
+## Key Files to Review Carefully
+
+1. **`src/lib/bazi.ts`**: Core calculation logic - verify accuracy
+2. **`src/lib/legion.ts`**: Character assignment logic - ensure proper mapping
+3. **`src/components/AIStoryGenerator.tsx`**: AI integration - check error handling
+4. **`src/App.tsx`**: Main app logic - verify state management
+5. **`src/components/BaZiInputForm.tsx`**: Input validation - check edge cases
+
+## Terminology Reference
+
+- **八字 (BaZi)**: Eight Characters / Four Pillars of Destiny
+- **天干 (Tiangan)**: Heavenly Stems (10 total)
+- **地支 (Dizhi)**: Earthly Branches (12 total)
+- **五行 (Wuxing)**: Five Elements (Wood, Fire, Earth, Metal, Water)
+- **陰陽 (Yinyang)**: Yin and Yang
+- **十神 (Shishen)**: Ten Gods (relationships between elements)
+- **納音 (Nayin)**: Sixty Jiazi sound classification
+- **藏干 (Canggan)**: Hidden Heavenly Stems in Earthly Branches
+
 ## Data Persistence
 
 Use Spark KV storage for user data:
@@ -419,6 +380,17 @@ npm run preview  # Preview production build
 6. **Test calculations** thoroughly with edge cases
 7. **Provide fallbacks** for AI and external dependencies
 8. **Update types** in respective lib files if adding new data structures
+
+## Questions to Ask During Review
+
+1. Does this change respect the traditional BaZi calculation rules?
+2. Are AI-generated stories culturally appropriate and engaging?
+3. Is the error handling comprehensive for all async operations?
+4. Does the UI maintain the cyberpunk/neon theme consistently?
+5. Are Chinese terms used correctly and consistently?
+6. Is the code accessible to users with disabilities?
+7. Does the change work well on mobile devices?
+8. Are there any performance implications for the calculations or rendering?
 
 ## Code Generation Tips for Copilot
 
