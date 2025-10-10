@@ -93,8 +93,7 @@ const TEN_GODS = {
 export async function calculateBaZi(input: BaZiInput): Promise<BaZiChart> {
   try {
     // 調用後端 API 進行計算
-    const result = await calculateBaziFromAPI(input)
-    return result
+    return await calculateBaziFromAPI(input)
   } catch (error) {
     console.error('八字計算錯誤:', error)
     
