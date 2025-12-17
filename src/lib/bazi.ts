@@ -11,6 +11,7 @@ export interface BaZiInput {
   minute: number;
   gender: 'male' | 'female';
   location?: string;
+  useTrueSolarTime?: boolean;
 }
 
 export interface BaZiPillar {
